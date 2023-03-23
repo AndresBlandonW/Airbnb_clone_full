@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/9-one_place.css">
+    <link rel="icon" href="../static/images/icon.png" />
+    <title>HBnB</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+    </header>
+    <div class="container">
+		<!-- FORM SEARCH -->
+      	<section class="filters">
+			<button class="search" style="cursor:pointer;" type="button" onclick="gotohome();" >Home</button>
+		</section>
+
+      <section class="places">
+		<div>
+		<article>
+			<div class="title_box">
+				<h1>{{ place.name }}</h1>
+				<div class="price_by_night">${{ place.price_by_night }}</div>
+			</div>
+			<div style="max-width: 100%; max-height: 100%;">
+				<img class="image_ban" src="../static/places_images/{{ place.image }}">
+			</div>
+			<div class="information">
+				<div class="max_guest">{{ place.max_guest }} Guest{% if place.max_guest != 1 %}s{% endif %}</div>
+					<div class="number_rooms">{{ place.number_rooms }} Bedroom{% if place.number_rooms != 1 %}s{% endif %}</div>
+					<div class="number_bathrooms">{{ place.number_bathrooms }} Bathroom{% if place.number_bathrooms != 1 %}s{% endif %}</div>
+			</div>
+			<div class="user">
+				<b>Owner:</b> {{ place.owner }}
+			</div>
+			<div class="description">
+				{{ place.description | safe }}
+			</div>
+
+			<!-- AMENITIES -->
+			<div class="amenities" role="list">
+				<h2>Amenities</h2>
+				<ul>
+					{% for am in place.amenities %}
+						<li>{{ am.name }}</li>
+					{% endfor %}
+				</ul>
+				<div class=reviews>
+					<h2>{{ place.reviews|length }} Reviews</h2>
+					<ul>
+						{% for review in place.reviews %}
+							<li>
+								<h3>From: {{ review.user_id | getuser }}</h3>
+								<h5>date {{ review.created_at.strftime('%d-%m-%Y')}}</h5>
+								<p>· {{ review.text }}</p>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				<div class="reserves">
+					<h2>Reserve</h2>
+					{% include 'reserve_container.html' %}
+				</div>
+			</div>
+
+			
+			
+		</article>
+		</div>
+      </section>
+    </div>
+    <footer>
+      <p>Airbnb Clone</p>
+    </footer>
+  </body>
+</html>
+
+
+<script>
+	function gotohome() {
+		window.location.href = "/";
+	}
+</script>

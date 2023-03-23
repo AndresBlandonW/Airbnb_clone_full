@@ -1,0 +1,78 @@
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    overflow: hidden;
+  }
+  
+  .booking-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: #f2f2f2;
+  }
+  
+  .booking-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #444;
+  }
+  
+  .booking-body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .booking-form label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .booking-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .booking-calendar-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #calendar {
+    max-width: 350px;
+    margin-top: 20px;
+  }
+
+  #reserve {
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%) !important;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    transition: box-shadow 0.2s ease,transform 0.1s ease;
+    border: none;
+    font-size: 16px;
+    background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+  }

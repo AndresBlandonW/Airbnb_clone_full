@@ -1,0 +1,32 @@
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="../static/styles/reserve.css">
+
+<div class="booking-container">
+    <div class="booking-header">
+      <h2>Select Dates</h2>
+    </div>
+    <div class="booking-body">
+      <div class="booking-form">
+        <label for="checkin">Check-in:</label>
+        <input type="text" id="checkin" placeholder="Select check-in date">
+        <label for="checkout">Check-out:</label>
+        <input type="text" id="checkout" placeholder="Select check-out date">
+      </div>
+      <div class="booking-calendar-container">
+        <div id="calendar"></div>
+      </div>
+      <button type="button" id="reserve"><strong>Reserve</strong></button>
+    </div>
+</div>
+
+<script>
+    $( function() {
+        $("#checkin,#checkout").datepicker({ minDate: new Date()});
+    } );
+
+    $("#reserve").click(function () {
+        alert("Option not available yet!");
+    });
+</script>

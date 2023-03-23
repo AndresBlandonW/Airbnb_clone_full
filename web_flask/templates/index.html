@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/8-places.css">
+    <link rel="icon" href="../static/images/icon.png" />
+    <title>HBnB</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+    </header>
+    <div class="container">
+		<!-- FORM SEARCH -->
+	<form method="post">
+      <section class="filters">
+			<div class="locations">
+				<h3>States</h3>
+				<h4 id="cityselect">&nbsp;{{ city.name }}</h4>
+				<div class="popover">
+					<ul>
+					{% for state in states %}
+						<li>
+							<h2>{{ state[0].name }}:</h2>
+							<ul>
+								{% for city in state[1] %}
+									<li><a id="{{ city.name }}" href="#" onclick="setCity(this.id);" data-other="{{ city.id }}">{{ city.name }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+				</div>
+				<div class="amenities">
+				<h3>Amenities</h3>
+				<h4 id="amenityselect">&nbsp;</h4>
+				<div class="popover">
+					<ul>
+					{% for amenity in amenities %}
+					<li><label><input id="{{ amenity.name }}" name="amenity" type="checkbox" onclick="getAme(this.id);" value="{{ amenity.id }}"><span>{{ amenity.name }}</span></label></li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<input type="text" id="city" name="city" hidden value="{{ city.id }}">
+			<button class="search" style="cursor:pointer;" type="submit">Search</button>
+		
+	
+	</section>
+	</form>
+	<br>
+	<div class="placesh1"><h1>Places</h1></div>
+      <section class="places">
+		{% for place in places %}
+		<div style="cursor:pointer;" id="{{ place.id }}" data-other="{{ url_for('place', place_id=place.id) }}" onclick="showPlace(this.id)" >
+		<article>
+			<div class="title_box">
+				<h2>{{ place.name }}</h2>
+				<div class="price_by_night">${{ place.price_by_night }}</div>
+			</div>
+			<div style="max-width: 100%; max-height: 100%;">
+				<img src="../static/places_images/{{ place.image }}" style="object-fit: cover; border-radius: 25px; width: 390px; height: 390px;">
+			</div>
+			<div class="user">
+				<b>Owner:</b> {{ place.owner }}
+			</div>
+			<div class="description">
+				{{ place.description | safe }}
+			</div>
+		</article>
+		</div>
+		{% endfor %}
+      </section>
+    </div>
+    <footer>
+      <p>Airbnb Clone</p>
+    </footer>
+  </body>
+</html>
+
+
+<script>
+	const amenity_list = [];
+
+	function setCity(name) {
+		//console.log(id);
+		var city_id = document.getElementById(name).getAttribute("data-other");
+		document.getElementById("cityselect").innerHTML = name;
+		document.getElementById("city").value = city_id;
+	}
+
+	function getAme(id) {
+		var che = document.getElementById(id);
+
+		if (che.checked) {
+
+			if (!amenity_list.includes(id)) {
+				amenity_list.push(id);
+			}
+		} else {
+			if (amenity_list.includes(id)) {
+				const index = amenity_list.indexOf(id);
+				if (index > -1) {
+					amenity_list.splice(index, 1);
+				}
+			}
+		}
+
+		console.log(amenity_list);
+		document.getElementById("amenityselect").innerHTML = amenity_list.toString();
+	}
+
+
+	function showPlace(id) {
+		var urlfor = document.getElementById(id).getAttribute("data-other");
+		window.location.href = urlfor;
+	}
+
+</script>

@@ -1,0 +1,28 @@
+    Search Places with a POST request.
+    ---
+    tags:
+      - Places
+    parameters:
+      - name: user_id and name
+        in: body
+        required: false
+        requires:
+          - cities
+          - amenities
+        properties:
+          cities:
+            type: array
+            items:
+              type: string
+          amenities:
+            type: array
+            items:
+              type: string
+
+    responses:
+      404:
+        description: resource not found!
+      400:
+        description: Not a valid JSON
+      200:
+        description: Successful request
